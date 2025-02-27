@@ -49,4 +49,62 @@ const ModuleCard = ({ module, index = 0 }: ModuleCardProps) => {
         {module.isPopular && (
           <Badge className="absolute top-3 right-3 bg-amber-500 border-0">Popular</Badge>
         )}
-        <div className="absolute
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+          <Badge className={`${getLevelColor(module.level)}`}>
+            {module.level.charAt(0).toUpperCase() + module.level.slice(1)}
+          </Badge>
+        </div>
+      </div>
+      
+      <div className="p-5">
+        <h3 className="text-lg font-medium line-clamp-2 mb-2">{module.title}</h3>
+        <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
+          {module.description}
+        </p>
+        
+        <div className="flex items-center text-sm text-muted-foreground mb-4">
+          <Clock className="h-4 w-4 mr-1" />
+          <span>{module.duration} min</span>
+          {module.hasQuiz && (
+            <span className="flex items-center ml-4">
+              <Award className="h-4 w-4 mr-1" />
+              {t('quizAvailable')}
+            </span>
+          )}
+        </div>
+        
+        {module.progress !== undefined && (
+          <div className="mb-4">
+            <div className="flex items-center justify-between text-sm mb-1">
+              <span>{module.progress}% Complete</span>
+              {module.completed && (
+                <span className="flex items-center text-green-600 dark:text-green-400">
+                  <BookOpen className="h-4 w-4 mr-1" />
+                  {t('moduleCompleted')}
+                </span>
+              )}
+            </div>
+            <Progress value={module.progress} className="h-2" />
+          </div>
+        )}
+        
+        {!isAvailableInCurrentLanguage && (
+          <Badge variant="outline" className="mb-4 bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300 border-amber-200 dark:border-amber-800">
+            Not available in {language}
+          </Badge>
+        )}
+        
+        <Link to={`/modules/${module.id}`}>
+          <Button 
+            className="w-full"
+            disabled={!isAvailableInCurrentLanguage}
+          >
+            {module.progress ? t('continueModule') : t('startLearning')}
+          </Button>
+        </Link>
+      </div>
+    </motion.div>
+  );
+};
+
+export default ModuleCard;
