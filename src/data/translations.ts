@@ -78,6 +78,30 @@ export const translations = {
     next: "Next",
     submit: "Submit",
     language: "Language",
+    
+    // Additional keys needed for translation
+    minutes: "minutes",
+    services: "Services",
+    languages: "Languages",
+    interactiveQuizzes: "Engaging quizzes",
+    realWorldScenarios: "Real-world scenarios",
+    progressTracking: "Progress tracking",
+    students: "Students",
+    professionals: "Professionals",
+    seniors: "Seniors",
+    directoryProviders: "Directory of verified providers",
+    locationSearch: "Location-based search",
+    contactOptions: "Direct contact options",
+    realTimeAvailability: "Real-time Availability",
+    realTimeUpdates: "Get real-time updates on legal aid service availability and appointment options",
+    progressTitle: "Progress Tracking",
+    progressDesc: "Track your learning progress and achievements across all modules",
+    basicRights: "Basic Rights",
+    noModulesAvailable: "No modules available for your current language and profile preferences.",
+    switchToEnglish: "Switch to English",
+    noResourcesAvailable: "No resources available in your selected language.",
+    noLegalAidProviders: "No legal aid providers found for your criteria.",
+    resetSearch: "Reset Search"
   },
   
   hi: {
@@ -158,6 +182,30 @@ export const translations = {
     next: "अगला",
     submit: "सबमिट करें",
     language: "भाषा",
+    
+    // Additional keys needed for translation
+    minutes: "मिनट",
+    services: "सेवाएं",
+    languages: "भाषाएं",
+    interactiveQuizzes: "इंटरैक्टिव क्विज़",
+    realWorldScenarios: "वास्तविक दुनिया के परिदृश्य",
+    progressTracking: "प्रगति ट्रैकिंग",
+    students: "छात्र",
+    professionals: "पेशेवर",
+    seniors: "वरिष्ठ नागरिक",
+    directoryProviders: "सत्यापित प्रदाताओं की डायरेक्टरी",
+    locationSearch: "स्थान-आधारित खोज",
+    contactOptions: "प्रत्यक्ष संपर्क विकल्प",
+    realTimeAvailability: "रीयल-टाइम उपलब्धता",
+    realTimeUpdates: "कानूनी सहायता सेवा उपलब्धता और अपॉइंटमेंट विकल्पों पर रीयल-टाइम अपडेट प्राप्त करें",
+    progressTitle: "प्रगति ट्रैकिंग",
+    progressDesc: "सभी मॉड्यूल में अपनी शिक्षा की प्रगति और उपलब्धियों को ट्रैक करें",
+    basicRights: "बुनियादी अधिकार",
+    noModulesAvailable: "आपकी वर्तमान भाषा और प्रोफ़ाइल प्राथमिकताओं के लिए कोई मॉड्यूल उपलब्ध नहीं है।",
+    switchToEnglish: "अंग्रेजी में स्विच करें",
+    noResourcesAvailable: "आपकी चयनित भाषा में कोई संसाधन उपलब्ध नहीं है।",
+    noLegalAidProviders: "आपके मानदंडों के लिए कोई कानूनी सहायता प्रदाता नहीं मिले।",
+    resetSearch: "खोज रीसेट करें"
   },
   
   es: {

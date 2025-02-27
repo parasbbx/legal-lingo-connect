@@ -237,6 +237,20 @@ const Index = () => {
     }
   };
 
+  // Function to translate level names
+  const getLevelName = (level: string) => {
+    switch(level) {
+      case 'beginner':
+        return t('beginnerLevel');
+      case 'intermediate':
+        return t('intermediateLevel');
+      case 'advanced':
+        return t('advancedLevel');
+      default:
+        return level;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Hero Section */}
@@ -249,23 +263,23 @@ const Index = () => {
         <div className="container px-4 mx-auto">
           <motion.div className="text-center max-w-3xl mx-auto mb-6" variants={itemVariants}>
             <Badge className="mb-4 bg-primary/10 text-primary border-0 rounded-full px-4 py-1">
-              Legal Literacy for All
+              {t('heroTitle')}
             </Badge>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
-              Making Legal Knowledge Accessible
+              {t('heroTitle')}
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Navigate the legal landscape with confidence through education, resources, and connections to legal aid.
+              {t('heroSubtitle')}
             </p>
           </motion.div>
 
           <motion.div variants={itemVariants} className="flex justify-center gap-4 flex-wrap mb-12">
             <Button size="lg" className="rounded-full">
-              Explore Modules
+              {t('getStarted')}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
             <Button variant="outline" size="lg" className="rounded-full">
-              Find Legal Aid
+              {t('learnMore')}
             </Button>
           </motion.div>
           
@@ -274,7 +288,7 @@ const Index = () => {
               <Select value={language} onValueChange={(value) => setLanguage(value as any)}>
                 <SelectTrigger className="w-[180px]">
                   <Globe className="h-4 w-4 mr-2" />
-                  <SelectValue placeholder="Language" />
+                  <SelectValue placeholder={t('language')} />
                 </SelectTrigger>
                 <SelectContent>
                   {availableLanguages.map((lang) => (
@@ -310,24 +324,24 @@ const Index = () => {
             <TabsList className="grid w-full grid-cols-3 mb-8">
               <TabsTrigger value="modules" className="text-sm md:text-base">
                 <BookOpen className="h-4 w-4 mr-2 hidden md:inline" />
-                Learning Modules
+                {t('modules')}
               </TabsTrigger>
               <TabsTrigger value="resources" className="text-sm md:text-base">
                 <FileText className="h-4 w-4 mr-2 hidden md:inline" />
-                Legal Resources
+                {t('resources')}
               </TabsTrigger>
               <TabsTrigger value="legalaid" className="text-sm md:text-base">
                 <Scale className="h-4 w-4 mr-2 hidden md:inline" />
-                Legal Aid
+                {t('legalAid')}
               </TabsTrigger>
             </TabsList>
             
             {/* Learning Modules Tab */}
             <TabsContent value="modules" className="pt-4">
               <div className="mb-8 max-w-3xl mx-auto text-center">
-                <h2 className="text-2xl md:text-3xl font-bold mb-4">Interactive Learning Modules</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-4">{t('modulesTitle')}</h2>
                 <p className="text-muted-foreground">
-                  Bite-sized modules with quizzes and interactive scenarios tailored to your profile and language preferences.
+                  {t('modulesSubtitle')}
                 </p>
               </div>
               
@@ -342,7 +356,7 @@ const Index = () => {
                       />
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
                         <Badge className={`${module.level === 'beginner' ? 'bg-green-500' : module.level === 'intermediate' ? 'bg-blue-500' : 'bg-purple-500'} border-0`}>
-                          {module.level}
+                          {getLevelName(module.level)}
                         </Badge>
                       </div>
                     </div>
@@ -353,7 +367,7 @@ const Index = () => {
                     <CardContent className="p-4 pt-2">
                       <div className="flex items-center text-sm text-muted-foreground mb-2">
                         <Clock className="h-4 w-4 mr-1" />
-                        <span>{module.duration} minutes</span>
+                        <span>{module.duration} {t('minutes')}</span>
                       </div>
                       <div className="flex flex-wrap gap-1 mb-2">
                         {module.languages.map(lang => (
@@ -365,7 +379,7 @@ const Index = () => {
                     </CardContent>
                     <CardFooter className="p-4 pt-0">
                       <Button className="w-full">
-                        Start Learning
+                        {t('startLearning')}
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </CardFooter>
@@ -376,10 +390,10 @@ const Index = () => {
               {filteredModules.length === 0 && (
                 <div className="text-center py-12">
                   <p className="text-muted-foreground">
-                    No modules available for your current language and profile preferences.
+                    {t('noModulesAvailable')}
                   </p>
                   <Button variant="outline" className="mt-4" onClick={() => setLanguage('en')}>
-                    Switch to English
+                    {t('switchToEnglish')}
                   </Button>
                 </div>
               )}
@@ -388,9 +402,9 @@ const Index = () => {
             {/* Legal Resources Tab */}
             <TabsContent value="resources" className="pt-4">
               <div className="mb-8 max-w-3xl mx-auto text-center">
-                <h2 className="text-2xl md:text-3xl font-bold mb-4">Legal Resources Library</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-4">{t('resourcesTitle')}</h2>
                 <p className="text-muted-foreground">
-                  Access a comprehensive collection of legal documents, guides, and templates in multiple languages.
+                  {t('resourcesSubtitle')}
                 </p>
               </div>
               
@@ -399,7 +413,7 @@ const Index = () => {
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input 
                     type="search" 
-                    placeholder="Search resources..." 
+                    placeholder={t('searchResources')}
                     className="pl-10"
                   />
                 </div>
@@ -434,7 +448,7 @@ const Index = () => {
                         </div>
                       </CardContent>
                       <CardFooter>
-                        <Button variant="outline" className="w-full">View Resource</Button>
+                        <Button variant="outline" className="w-full">{t('viewAll')}</Button>
                       </CardFooter>
                     </Card>
                   ))}
@@ -443,10 +457,10 @@ const Index = () => {
               {legalResources.filter(resource => resource.languages.includes(language)).length === 0 && (
                 <div className="text-center py-12">
                   <p className="text-muted-foreground">
-                    No resources available in your selected language.
+                    {t('noResourcesAvailable')}
                   </p>
                   <Button variant="outline" className="mt-4" onClick={() => setLanguage('en')}>
-                    Switch to English
+                    {t('switchToEnglish')}
                   </Button>
                 </div>
               )}
@@ -455,9 +469,9 @@ const Index = () => {
             {/* Legal Aid Tab */}
             <TabsContent value="legalaid" className="pt-4">
               <div className="mb-8 max-w-3xl mx-auto text-center">
-                <h2 className="text-2xl md:text-3xl font-bold mb-4">Legal Aid Services</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-4">{t('legalAidTitle')}</h2>
                 <p className="text-muted-foreground">
-                  Connect with legal aid providers in your area with real-time availability updates.
+                  {t('legalAidSubtitle')}
                 </p>
               </div>
               
@@ -466,13 +480,13 @@ const Index = () => {
                   <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input 
                     type="text" 
-                    placeholder="Search by location..." 
+                    placeholder={t('searchLocation')}
                     className="pl-10"
                     value={searchLocation}
                     onChange={(e) => setSearchLocation(e.target.value)}
                   />
                 </div>
-                <Button onClick={handleLocationSearch}>Find Services</Button>
+                <Button onClick={handleLocationSearch}>{t('findServices')}</Button>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -489,7 +503,7 @@ const Index = () => {
                                 : 'bg-amber-500 hover:bg-amber-600'
                             } border-0 text-white`}
                           >
-                            {provider.availability === 'available' ? 'Available Now' : 'By Appointment'}
+                            {provider.availability === 'available' ? t('availableNow') : t('appointmentRequired')}
                           </Badge>
                           <div className="bg-primary/10 p-2 rounded-full">
                             {getProviderIcon(provider.type)}
@@ -503,7 +517,7 @@ const Index = () => {
                       </CardHeader>
                       <CardContent>
                         <div className="mb-3">
-                          <h4 className="text-sm font-medium mb-2">Services:</h4>
+                          <h4 className="text-sm font-medium mb-2">{t('services')}:</h4>
                           <div className="flex flex-wrap gap-1">
                             {provider.services.map((service, i) => (
                               <Badge key={i} variant="secondary" className="text-xs">
@@ -513,7 +527,7 @@ const Index = () => {
                           </div>
                         </div>
                         <div>
-                          <h4 className="text-sm font-medium mb-2">Languages:</h4>
+                          <h4 className="text-sm font-medium mb-2">{t('languages')}:</h4>
                           <div className="flex flex-wrap gap-1">
                             {provider.languages.map(lang => (
                               <Badge key={lang} variant="outline" className="text-xs">
@@ -524,7 +538,7 @@ const Index = () => {
                         </div>
                       </CardContent>
                       <CardFooter className="flex-col items-stretch gap-2">
-                        <Button className="w-full">Contact Provider</Button>
+                        <Button className="w-full">{t('contactUs')}</Button>
                         <p className="text-xs text-center text-muted-foreground">
                           {provider.contact}
                         </p>
@@ -536,13 +550,13 @@ const Index = () => {
               {filteredAidProviders.filter(provider => provider.languages.includes(language)).length === 0 && (
                 <div className="text-center py-12">
                   <p className="text-muted-foreground">
-                    No legal aid providers found for your criteria.
+                    {t('noLegalAidProviders')}
                   </p>
                   <Button variant="outline" className="mt-4" onClick={() => {
                     setSearchLocation('');
                     setFilteredAidProviders(legalAidProviders);
                   }}>
-                    Reset Search
+                    {t('resetSearch')}
                   </Button>
                 </div>
               )}
@@ -555,9 +569,9 @@ const Index = () => {
       <section className="py-16 bg-gray-100 dark:bg-gray-800">
         <div className="container px-4 mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Platform Features</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">{t('featuresTitle')}</h2>
             <p className="text-muted-foreground">
-              Our comprehensive legal literacy solution offers these key features to empower communities.
+              {t('featuresSubtitle')}
             </p>
           </div>
           
@@ -567,11 +581,11 @@ const Index = () => {
                 <div className="bg-primary/10 w-12 h-12 flex items-center justify-center rounded-full mb-4">
                   <Globe className="h-6 w-6 text-primary" />
                 </div>
-                <CardTitle>Multilingual Support</CardTitle>
+                <CardTitle>{t('multilingual')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Access legal information in multiple languages with accurate translation and cultural context.
+                  {t('multilingualDesc')}
                 </p>
                 <div className="flex flex-wrap gap-1 mt-4">
                   {availableLanguages.map((lang) => (
@@ -588,24 +602,24 @@ const Index = () => {
                 <div className="bg-primary/10 w-12 h-12 flex items-center justify-center rounded-full mb-4">
                   <BookOpen className="h-6 w-6 text-primary" />
                 </div>
-                <CardTitle>Interactive Learning</CardTitle>
+                <CardTitle>{t('interactive')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Bite-sized modules with quizzes and interactive scenarios for effective learning.
+                  {t('interactiveDesc')}
                 </p>
                 <ul className="mt-4 space-y-2">
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2 text-green-500" />
-                    <span className="text-sm">Engaging quizzes</span>
+                    <span className="text-sm">{t('interactiveQuizzes')}</span>
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2 text-green-500" />
-                    <span className="text-sm">Real-world scenarios</span>
+                    <span className="text-sm">{t('realWorldScenarios')}</span>
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2 text-green-500" />
-                    <span className="text-sm">Progress tracking</span>
+                    <span className="text-sm">{t('progressTracking')}</span>
                   </li>
                 </ul>
               </CardContent>
@@ -616,30 +630,30 @@ const Index = () => {
                 <div className="bg-primary/10 w-12 h-12 flex items-center justify-center rounded-full mb-4">
                   <Users className="h-6 w-6 text-primary" />
                 </div>
-                <CardTitle>Personalized Content</CardTitle>
+                <CardTitle>{t('personalized')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Content tailored for different user profiles - students, professionals, and senior citizens.
+                  {t('personalizedDesc')}
                 </p>
                 <div className="grid grid-cols-3 gap-2 mt-4">
                   <div className="flex flex-col items-center">
                     <div className="bg-blue-100 dark:bg-blue-900 p-2 rounded-full">
                       <GraduationCap className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                     </div>
-                    <span className="text-xs mt-1">Students</span>
+                    <span className="text-xs mt-1">{t('students')}</span>
                   </div>
                   <div className="flex flex-col items-center">
                     <div className="bg-amber-100 dark:bg-amber-900 p-2 rounded-full">
                       <Briefcase className="h-5 w-5 text-amber-600 dark:text-amber-400" />
                     </div>
-                    <span className="text-xs mt-1">Professionals</span>
+                    <span className="text-xs mt-1">{t('professionals')}</span>
                   </div>
                   <div className="flex flex-col items-center">
                     <div className="bg-green-100 dark:bg-green-900 p-2 rounded-full">
                       <PersonStanding className="h-5 w-5 text-green-600 dark:text-green-400" />
                     </div>
-                    <span className="text-xs mt-1">Seniors</span>
+                    <span className="text-xs mt-1">{t('seniors')}</span>
                   </div>
                 </div>
               </CardContent>
@@ -650,24 +664,24 @@ const Index = () => {
                 <div className="bg-primary/10 w-12 h-12 flex items-center justify-center rounded-full mb-4">
                   <Scale className="h-6 w-6 text-primary" />
                 </div>
-                <CardTitle>Legal Aid Connections</CardTitle>
+                <CardTitle>{t('legalAidFeature')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Connect with legal aid services and professionals for personalized assistance.
+                  {t('legalAidDesc')}
                 </p>
                 <ul className="mt-4 space-y-2">
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2 text-green-500" />
-                    <span className="text-sm">Directory of verified providers</span>
+                    <span className="text-sm">{t('directoryProviders')}</span>
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2 text-green-500" />
-                    <span className="text-sm">Location-based search</span>
+                    <span className="text-sm">{t('locationSearch')}</span>
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 mr-2 text-green-500" />
-                    <span className="text-sm">Direct contact options</span>
+                    <span className="text-sm">{t('contactOptions')}</span>
                   </li>
                 </ul>
               </CardContent>
@@ -678,15 +692,15 @@ const Index = () => {
                 <div className="bg-primary/10 w-12 h-12 flex items-center justify-center rounded-full mb-4">
                   <Clock className="h-6 w-6 text-primary" />
                 </div>
-                <CardTitle>Real-time Availability</CardTitle>
+                <CardTitle>{t('realTimeAvailability')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Get real-time updates on legal aid service availability and appointment options.
+                  {t('realTimeUpdates')}
                 </p>
                 <div className="flex gap-2 mt-4">
-                  <Badge className="bg-green-500 hover:bg-green-600 border-0">Available Now</Badge>
-                  <Badge className="bg-amber-500 hover:bg-amber-600 border-0">By Appointment</Badge>
+                  <Badge className="bg-green-500 hover:bg-green-600 border-0">{t('availableNow')}</Badge>
+                  <Badge className="bg-amber-500 hover:bg-amber-600 border-0">{t('appointmentRequired')}</Badge>
                 </div>
               </CardContent>
             </Card>
@@ -696,16 +710,16 @@ const Index = () => {
                 <div className="bg-primary/10 w-12 h-12 flex items-center justify-center rounded-full mb-4">
                   <BarChart3 className="h-6 w-6 text-primary" />
                 </div>
-                <CardTitle>Progress Tracking</CardTitle>
+                <CardTitle>{t('progressTitle')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Track your learning progress and achievements across all modules.
+                  {t('progressDesc')}
                 </p>
                 <div className="space-y-2 mt-4">
                   <div>
                     <div className="flex justify-between text-xs mb-1">
-                      <span>Basic Rights</span>
+                      <span>{t('basicRights')}</span>
                       <span>75%</span>
                     </div>
                     <div className="w-full bg-gray-200 dark:bg-gray-700 h-2 rounded-full overflow-hidden">
@@ -714,7 +728,7 @@ const Index = () => {
                   </div>
                   <div>
                     <div className="flex justify-between text-xs mb-1">
-                      <span>Property Law</span>
+                      <span>{t('propertyLaw')}</span>
                       <span>40%</span>
                     </div>
                     <div className="w-full bg-gray-200 dark:bg-gray-700 h-2 rounded-full overflow-hidden">
